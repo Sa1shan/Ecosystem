@@ -2,6 +2,6 @@
 {
     public interface IObserver
     {
-        void Update(float currentTime);
+        void UpdateTime(float timeOfDay);
     }
 }

@@ -4,6 +4,6 @@ namespace _Source.GameScript.Interfaces
     {
         void RegisterObserver(IObserver observer);
         void RemoveObserver(IObserver observer);
-        void Notify();
+        void NotifyObservers();
     }
 }
