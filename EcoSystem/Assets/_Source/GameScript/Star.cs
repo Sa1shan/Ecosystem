@@ -14,27 +14,27 @@ namespace _Source.GameScript
 
         private void Start()
         {
-            _materialPropertyBlock = new MaterialPropertyBlock(); // Инициализируем MaterialPropertyBlock
-            SetStarsAlpha(0f); // Изначально скрываем звезды
+            _materialPropertyBlock = new MaterialPropertyBlock(); 
+            SetStarsAlpha(0f); 
         }
 
         public void UpdateTime(float time)
         {
-            if (time >= 0f && time < 0.25f) // Ночь
+            if (time >= 0f && time < 0.25f) 
             {
-                _targetAlpha = 1f; // Звезды полностью видны
+                _targetAlpha = 1f;
             }
-            else if (time >= 0.25f && time < 0.5f) // Утро
+            else if (time >= 0.25f && time < 0.5f) 
             {
-                _targetAlpha = 0f; // Звезды скрыты
+                _targetAlpha = 0f; 
             }
-            else if (time >= 0.5f && time < 0.75f) // День
+            else if (time >= 0.5f && time < 0.75f) 
             {
-                _targetAlpha = 0f; // Звезды скрыты
+                _targetAlpha = 0f; 
             }
-            else if (time >= 0.75f && time <= 1f) // Вечер
+            else if (time >= 0.75f && time <= 1f) 
             {
-                _targetAlpha = Mathf.Lerp(0f, 1f, (time - 0.75f) * 4f); // Звезды начинают появляться
+                _targetAlpha = Mathf.Lerp(0f, 1f, (time - 0.75f) * 4f); 
             }
 
             StopAllCoroutines();
@@ -44,8 +44,7 @@ namespace _Source.GameScript
         private System.Collections.IEnumerator FadeStars()
         {
             float currentAlpha = stars[0].color.a;
-
-            // Плавно изменяем альфа-значение звезд
+            
             while (!Mathf.Approximately(currentAlpha, _targetAlpha))
             {
                 currentAlpha = Mathf.MoveTowards(currentAlpha, _targetAlpha, fadeSpeed * Time.deltaTime);
@@ -58,13 +57,10 @@ namespace _Source.GameScript
         {
             foreach (var star in stars)
             {
-                // Получаем материал через MaterialPropertyBlock
                 star.GetPropertyBlock(_materialPropertyBlock);
-
-                // Меняем альфа-канал в _Color
+                
                 _materialPropertyBlock.SetColor("_Color", new Color(star.color.r, star.color.g, star.color.b, alpha));
-
-                // Применяем изменения к звезде
+                
                 star.SetPropertyBlock(_materialPropertyBlock);
             }
         }

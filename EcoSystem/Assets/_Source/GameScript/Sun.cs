@@ -5,8 +5,8 @@ namespace _Source.GameScript
 {
     public class Sun : MonoBehaviour, IObserver
     {
-        [SerializeField] private Transform centerPoint; // Центр вращения (пустой объект в центре сцены)
-        [SerializeField] private float radius = 5f; // Радиус движения солнца
+        [SerializeField] private Transform centerPoint; 
+        [SerializeField] private float radius = 5f; 
 
         private float _angle = -Mathf.PI / 2;
         private void Start()
